@@ -76,7 +76,7 @@ const filteredProjects = computed(() =>
                             decoding="async"
                         >
                         <span
-                            v-if="project.is_sold"
+                            v-if="project.category === 'Art' && project.is_sold"
                             class="absolute left-4 top-4 rounded-full bg-white/92 px-3 py-1 text-[0.65rem] uppercase tracking-[0.28em] text-[#6b6b6b]"
                         >
                             Sold

@@ -28,6 +28,7 @@ let purchaseCopyTimer = null;
 const purchaseEmail = 'Jenniferwilliams1956@yahoo.com';
 
 const activeImage = computed(() => props.project.images[currentIndex.value] ?? props.project.hero_image);
+const showSoldMetadata = computed(() => props.project.category === 'Art' && props.project.is_sold);
 const showPurchaseCta = computed(() => props.project.category === 'Art' && !props.project.is_sold);
 const showSoldCta = computed(() => props.project.category === 'Art' && props.project.is_sold);
 
@@ -219,15 +220,15 @@ onBeforeUnmount(() => {
                     </p>
 
                     <p
-                        v-if="project.is_sold || project.location || project.medium || project.year"
+                        v-if="showSoldMetadata || project.location || project.medium || project.year"
                         class="mt-8 text-[0.76rem] uppercase tracking-[0.28em] text-[#9a9a9a]"
                     >
-                        <span v-if="project.is_sold">Sold</span>
-                        <span v-if="project.is_sold && project.location"> · </span>
+                        <span v-if="showSoldMetadata">Sold</span>
+                        <span v-if="showSoldMetadata && project.location"> · </span>
                         <span v-if="project.location">{{ project.location }}</span>
-                        <span v-if="(project.is_sold || project.location) && project.medium"> · </span>
+                        <span v-if="((showSoldMetadata) || project.location) && project.medium"> · </span>
                         <span v-if="project.medium">{{ project.medium }}</span>
-                        <span v-if="(project.is_sold || project.location || project.medium) && project.year"> · </span>
+                        <span v-if="(showSoldMetadata || project.location || project.medium) && project.year"> · </span>
                         <span v-if="project.year">{{ project.year }}</span>
                     </p>
 
