@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProjectRequest;
 use App\Models\Project;
+use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
@@ -16,7 +17,7 @@ class AdminProjectController extends Controller
     {
         return Inertia::render('Admin/Dashboard', [
             'projects' => Project::query()
-                ->latest()
+                ->ordered()
                 ->get()
                 ->map(fn (Project $project) => $this->transformProject($project))
                 ->values(),
@@ -37,6 +38,7 @@ class AdminProjectController extends Controller
 
         $project = new Project([
             ...$request->safe()->except(['image', 'images', 'new_image_keys', 'image_order']),
+            'sort_order' => (Project::max('sort_order') ?? 0) + 1,
             'images' => $imagePaths,
             'image_path' => $imagePaths[0],
         ]);
@@ -78,6 +80,7 @@ class AdminProjectController extends Controller
         Storage::disk('public')->delete($project->getImagePaths());
         $title = $project->title;
         $project->delete();
+        $this->normalizeSortOrder();
 
         return to_route('admin.dashboard')->with('success', "\"{$title}\" was deleted.");
     }
@@ -96,6 +99,37 @@ class AdminProjectController extends Controller
         );
     }
 
+    public function move(Request $request, Project $project): RedirectResponse
+    {
+        $direction = $request->validate([
+            'direction' => ['required', 'in:up,down'],
+        ])['direction'];
+
+        $adjacentProject = $direction === 'up'
+            ? Project::query()
+                ->where('sort_order', '<', $project->sort_order)
+                ->orderByDesc('sort_order')
+                ->first()
+            : Project::query()
+                ->where('sort_order', '>', $project->sort_order)
+                ->orderBy('sort_order')
+                ->first();
+
+        if ($adjacentProject) {
+            $currentOrder = $project->sort_order;
+
+            $project->update([
+                'sort_order' => $adjacentProject->sort_order,
+            ]);
+
+            $adjacentProject->update([
+                'sort_order' => $currentOrder,
+            ]);
+        }
+
+        return to_route('admin.dashboard')->with('success', "\"{$project->title}\" order updated.");
+    }
+
     private function transformProject(Project $project): array
     {
         return [
@@ -103,6 +137,7 @@ class AdminProjectController extends Controller
             'slug' => $project->slug,
             'title' => $project->title,
             'category' => $project->category,
+            'sort_order' => $project->sort_order,
             'image_url' => $project->image_url,
             'image_urls' => $project->image_urls,
             'image_paths' => $project->getImagePaths(),
@@ -151,5 +186,18 @@ class AdminProjectController extends Controller
         }
 
         return $orderedImages;
+    }
+
+    private function normalizeSortOrder(): void
+    {
+        Project::query()
+            ->ordered()
+            ->get()
+            ->values()
+            ->each(function (Project $project, int $index): void {
+                $project->forceFill([
+                    'sort_order' => $index + 1,
+                ])->saveQuietly();
+            });
     }
 }

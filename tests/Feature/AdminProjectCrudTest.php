@@ -65,4 +65,37 @@ class AdminProjectCrudTest extends TestCase
         $this->assertDatabaseMissing('projects', ['id' => $project->id]);
         Storage::disk('public')->assertMissing($currentPath);
     }
+
+    public function test_admin_can_reorder_projects(): void
+    {
+        $session = [config('admin.session_key') => true];
+
+        $first = Project::create([
+            'title' => 'First',
+            'slug' => 'first',
+            'category' => 'Art',
+            'sort_order' => 1,
+            'image_path' => 'projects/first.jpg',
+            'images' => ['projects/first.jpg'],
+        ]);
+
+        $second = Project::create([
+            'title' => 'Second',
+            'slug' => 'second',
+            'category' => 'Art',
+            'sort_order' => 2,
+            'image_path' => 'projects/second.jpg',
+            'images' => ['projects/second.jpg'],
+        ]);
+
+        $this->withSession($session)->patch("/admin/projects/{$second->id}/move", [
+            'direction' => 'up',
+        ])->assertRedirect('/admin/dashboard');
+
+        $first->refresh();
+        $second->refresh();
+
+        $this->assertSame(2, $first->sort_order);
+        $this->assertSame(1, $second->sort_order);
+    }
 }

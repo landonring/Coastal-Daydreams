@@ -21,6 +21,10 @@ const deleteProject = (project) => {
 const toggleSold = (project) => {
     router.patch(`/admin/projects/${project.id}/sold`);
 };
+
+const moveProject = (project, direction) => {
+    router.patch(`/admin/projects/${project.id}/move`, { direction });
+};
 </script>
 
 <template>
@@ -43,7 +47,7 @@ const toggleSold = (project) => {
 
         <div v-if="projects.length" class="mt-8 space-y-4">
             <article
-                v-for="project in projects"
+                v-for="(project, index) in projects"
                 :key="project.id"
                 class="grid gap-5 rounded-[1.75rem] bg-white p-5 md:grid-cols-[120px_1fr_auto] md:items-center md:gap-6 md:p-6"
             >
@@ -72,11 +76,27 @@ const toggleSold = (project) => {
                     </p>
 
                     <p class="mt-3 text-[0.72rem] uppercase tracking-[0.28em] text-[#9a9a9a]">
-                        /projects/{{ project.slug }} · {{ project.image_urls.length }} images · {{ project.created_at }}
+                        Order {{ index + 1 }} · /projects/{{ project.slug }} · {{ project.image_urls.length }} images · {{ project.created_at }}
                     </p>
                 </div>
 
                 <div class="flex flex-wrap gap-3 md:justify-end">
+                    <button
+                        type="button"
+                        class="rounded-2xl bg-[#f7f6f3] px-4 py-3 text-sm text-[#111111] transition-colors duration-200 hover:bg-[#efede8] disabled:cursor-not-allowed disabled:opacity-40"
+                        :disabled="index === 0"
+                        @click="moveProject(project, 'up')"
+                    >
+                        Up
+                    </button>
+                    <button
+                        type="button"
+                        class="rounded-2xl bg-[#f7f6f3] px-4 py-3 text-sm text-[#111111] transition-colors duration-200 hover:bg-[#efede8] disabled:cursor-not-allowed disabled:opacity-40"
+                        :disabled="index === projects.length - 1"
+                        @click="moveProject(project, 'down')"
+                    >
+                        Down
+                    </button>
                     <Link
                         :href="`/admin/projects/${project.id}/edit`"
                         class="rounded-2xl bg-[#f7f6f3] px-4 py-3 text-sm text-[#111111] transition-colors duration-200 hover:bg-[#efede8]"

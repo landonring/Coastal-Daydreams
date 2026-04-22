@@ -11,6 +11,7 @@ class Project extends Model
         'title',
         'slug',
         'category',
+        'sort_order',
         'image_path',
         'images',
         'description',
@@ -21,6 +22,7 @@ class Project extends Model
     ];
 
     protected $casts = [
+        'sort_order' => 'integer',
         'images' => 'array',
         'is_sold' => 'boolean',
         'year' => 'integer',
@@ -68,6 +70,11 @@ class Project extends Model
             ->filter()
             ->values()
             ->all();
+    }
+
+    public function scopeOrdered($query)
+    {
+        return $query->orderBy('sort_order')->orderByDesc('created_at');
     }
 
     public function resolveRouteBinding($value, $field = null): ?self

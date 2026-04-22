@@ -11,7 +11,7 @@ class ProjectShowController extends Controller
     public function __invoke(Project $project): Response
     {
         $orderedProjects = Project::query()
-            ->latest()
+            ->ordered()
             ->get(['id', 'slug', 'title']);
 
         $currentIndex = $orderedProjects->search(fn (Project $item) => $item->id === $project->id);

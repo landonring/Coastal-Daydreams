@@ -14,7 +14,7 @@ class HomeController extends Controller
         return Inertia::render('Home', [
             'aboutPhotos' => $this->aboutPhotos(),
             'projects' => Project::query()
-                ->latest()
+                ->ordered()
                 ->get()
                 ->map(fn (Project $project) => $this->transformProject($project))
                 ->values(),
