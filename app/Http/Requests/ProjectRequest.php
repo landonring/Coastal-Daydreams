@@ -49,6 +49,7 @@ class ProjectRequest extends FormRequest
             'location' => ['nullable', 'string', 'max:255'],
             'medium' => ['nullable', 'string', 'max:255'],
             'year' => ['nullable', 'integer', 'between:1000,9999'],
+            'hover_preview_enabled' => ['nullable', 'boolean'],
             'is_sold' => ['nullable', 'boolean'],
         ];
     }
@@ -70,7 +71,10 @@ class ProjectRequest extends FormRequest
 
         $this->merge([
             'slug' => $slug,
-            'is_sold' => $this->boolean('is_sold'),
+            'hover_preview_enabled' => $this->boolean('hover_preview_enabled', true),
+            'is_sold' => $this->input('category') === 'Art'
+                ? $this->boolean('is_sold')
+                : false,
         ]);
     }
 }

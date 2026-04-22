@@ -12,6 +12,7 @@ class Project extends Model
         'slug',
         'category',
         'sort_order',
+        'hover_preview_enabled',
         'image_path',
         'images',
         'description',
@@ -23,6 +24,7 @@ class Project extends Model
 
     protected $casts = [
         'sort_order' => 'integer',
+        'hover_preview_enabled' => 'boolean',
         'images' => 'array',
         'is_sold' => 'boolean',
         'year' => 'integer',

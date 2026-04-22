@@ -30,6 +30,7 @@ class HomeController extends Controller
             'category' => $project->category,
             'image' => $project->image_url,
             'images' => $project->image_urls,
+            'hover_preview_enabled' => $project->hover_preview_enabled,
             'description' => $project->description,
             'is_sold' => $project->is_sold,
             'created_at' => $project->created_at?->toIso8601String(),

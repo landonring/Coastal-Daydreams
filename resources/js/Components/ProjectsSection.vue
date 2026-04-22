@@ -68,7 +68,7 @@ const filteredProjects = computed(() =>
                             decoding="async"
                         >
                         <img
-                            v-if="project.images?.[1]"
+                            v-if="project.hover_preview_enabled && project.images?.[1]"
                             :src="project.images[1]"
                             :alt="`${project.title} alternate view`"
                             class="absolute inset-0 h-full w-full object-cover opacity-0 transition-all duration-500 ease-out group-hover:scale-[1.015] group-hover:opacity-100"

@@ -98,4 +98,48 @@ class AdminProjectCrudTest extends TestCase
         $this->assertSame(2, $first->sort_order);
         $this->assertSame(1, $second->sort_order);
     }
+
+    public function test_admin_can_bulk_reorder_projects(): void
+    {
+        $session = [config('admin.session_key') => true];
+
+        $first = Project::create([
+            'title' => 'First',
+            'slug' => 'first',
+            'category' => 'Art',
+            'sort_order' => 1,
+            'image_path' => 'projects/first.jpg',
+            'images' => ['projects/first.jpg'],
+        ]);
+
+        $second = Project::create([
+            'title' => 'Second',
+            'slug' => 'second',
+            'category' => 'Photography',
+            'sort_order' => 2,
+            'image_path' => 'projects/second.jpg',
+            'images' => ['projects/second.jpg'],
+        ]);
+
+        $third = Project::create([
+            'title' => 'Third',
+            'slug' => 'third',
+            'category' => 'Art',
+            'sort_order' => 3,
+            'image_path' => 'projects/third.jpg',
+            'images' => ['projects/third.jpg'],
+        ]);
+
+        $this->withSession($session)->patch('/admin/projects/reorder', [
+            'project_ids' => [$third->id, $first->id, $second->id],
+        ])->assertRedirect('/admin/dashboard');
+
+        $first->refresh();
+        $second->refresh();
+        $third->refresh();
+
+        $this->assertSame(2, $first->sort_order);
+        $this->assertSame(3, $second->sort_order);
+        $this->assertSame(1, $third->sort_order);
+    }
 }

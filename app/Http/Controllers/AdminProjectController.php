@@ -130,6 +130,29 @@ class AdminProjectController extends Controller
         return to_route('admin.dashboard')->with('success', "\"{$project->title}\" order updated.");
     }
 
+    public function reorder(Request $request): RedirectResponse
+    {
+        $projectIds = $request->validate([
+            'project_ids' => ['required', 'array', 'min:1'],
+            'project_ids.*' => ['integer', 'exists:projects,id'],
+        ])['project_ids'];
+
+        Project::query()
+            ->ordered()
+            ->get()
+            ->sortBy(fn (Project $project) => array_search($project->id, $projectIds, true) === false
+                ? PHP_INT_MAX
+                : array_search($project->id, $projectIds, true))
+            ->values()
+            ->each(function (Project $project, int $index): void {
+                $project->forceFill([
+                    'sort_order' => $index + 1,
+                ])->saveQuietly();
+            });
+
+        return to_route('admin.dashboard')->with('success', 'Project order updated.');
+    }
+
     private function transformProject(Project $project): array
     {
         return [
@@ -138,6 +161,7 @@ class AdminProjectController extends Controller
             'title' => $project->title,
             'category' => $project->category,
             'sort_order' => $project->sort_order,
+            'hover_preview_enabled' => $project->hover_preview_enabled,
             'image_url' => $project->image_url,
             'image_urls' => $project->image_urls,
             'image_paths' => $project->getImagePaths(),
