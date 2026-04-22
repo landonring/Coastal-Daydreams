@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="14" fill="#FCFBF8"/>
+  <ellipse cx="32" cy="56" rx="23" ry="3.5" fill="#E8E1D5"/>
+  <g filter="url(#shadow)">
+    <path d="M18.5 48.5L24 21.5H27L22 49.5C21.8 50.6 20.7 51.2 19.7 50.8L18.5 50.3V48.5Z" fill="#9B6236"/>
+    <path d="M34.7 21.5H38L43.7 48.2V50.1L42.4 50.7C41.4 51.1 40.3 50.5 40.1 49.4L34.7 21.5Z" fill="#A56A39"/>
+    <path d="M22 13.5C22 12.7 22.7 12 23.5 12H31.8C32.6 12 33.3 12.7 33.3 13.5V21H22V13.5Z" fill="#C98A4C"/>
+    <path d="M18.2 20.8C18.2 19.8 19 19 20 19H37.8C38.8 19 39.6 19.8 39.6 20.8V24.4H18.2V20.8Z" fill="#D89956"/>
+    <g transform="rotate(-4 28.5 28)">
+      <rect x="13.5" y="15.5" width="29" height="28" rx="2.8" fill="#F5F1EC" stroke="#B8B1AA"/>
+      <rect x="15.7" y="17.7" width="24.6" height="23.6" rx="1.9" fill="url(#sunset)"/>
+      <path d="M15.7 29.2C20.3 27.4 23.1 29.7 25.8 29.7C28.6 29.7 31 27.6 33.8 27.6C36.4 27.6 38 29.1 40.3 28.8V41.3H15.7V29.2Z" fill="url(#ocean)"/>
+      <path d="M15.7 35.3C18.3 34.1 19.7 35.9 22 35.9C24.2 35.9 25.6 34 27.7 34C29.9 34 31.4 35.8 33.6 35.8C35.8 35.8 37 34.4 40.3 35.2V41.3H15.7V35.3Z" fill="#58A9D6"/>
+      <path d="M17.5 36.3C18.7 35.2 20 35.3 21.1 36.1C22.4 37.1 23.4 37.4 24.8 36.6C26 35.9 27 35.8 28.3 36.7C29.8 37.8 31 37.9 32.4 37C33.5 36.3 34.7 36.2 36.1 37C37.4 37.8 38.7 37.7 40 36.7" stroke="#FFF4E8" stroke-width="1.3" stroke-linecap="round"/>
+      <circle cx="28.5" cy="25.3" r="3.3" fill="#FFE7A3"/>
+    </g>
+    <g transform="translate(41 41)">
+      <path d="M0.8 2.7C3.8 -0.8 10.7 -1.6 15.4 1C19.5 3.2 22.4 8.7 21.3 13.7C20.1 19.2 14.6 22.7 9.4 22.2C4.2 21.7 -0.3 17.5 -1.1 12.3C-1.6 8.9 -1.2 5 0.8 2.7Z" fill="#E8B572"/>
+      <path d="M5.8 7.7C6.8 6.6 8.4 6.2 9.7 6.7C11.1 7.2 11.8 8.8 11.4 10.2C11 11.6 9.6 12.6 8.2 12.4C6.7 12.2 5.5 10.8 5.5 9.3C5.5 8.7 5.5 8.2 5.8 7.7Z" fill="#F7F4EF"/>
+      <circle cx="14.7" cy="8.2" r="2.1" fill="#F7B42B"/>
+      <circle cx="16.8" cy="12.6" r="2.1" fill="#4CAF50"/>
+      <circle cx="14.2" cy="16.9" r="2.1" fill="#2E78D3"/>
+      <circle cx="10.1" cy="18.6" r="2.1" fill="#E67E22"/>
+      <circle cx="6" cy="16.9" r="2.1" fill="#C04B64"/>
+    </g>
+    <g transform="rotate(29 43 35)">
+      <rect x="40.9" y="25.6" width="3.2" height="20.6" rx="1.6" fill="#8F5528"/>
+      <path d="M39.7 23.6C40.6 21.2 43.7 18.1 46.2 17.9C46.5 20.7 45.7 23.8 43.7 25.7C42.7 26.6 41.2 26.2 40.4 25.4L39.7 24.7V23.6Z" fill="#D4933A"/>
+    </g>
+  </g>
+  <defs>
+    <linearGradient id="sunset" x1="28" y1="17.7" x2="28" y2="41.3" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F6C8A4"/>
+      <stop offset="0.42" stop-color="#FFD98B"/>
+      <stop offset="0.68" stop-color="#6AAAE2"/>
+      <stop offset="1" stop-color="#2C74B7"/>
+    </linearGradient>
+    <linearGradient id="ocean" x1="28" y1="27.6" x2="28" y2="41.3" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4F9FD3"/>
+      <stop offset="1" stop-color="#24659F"/>
+    </linearGradient>
+    <filter id="shadow" x="7" y="8" width="50" height="49" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="1.4" stdDeviation="1.5" flood-color="#C9C0B4" flood-opacity="0.55"/>
+    </filter>
+  </defs>
+</svg>
