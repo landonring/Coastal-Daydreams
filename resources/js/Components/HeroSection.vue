@@ -4,6 +4,10 @@ const props = defineProps({
         type: String,
         required: true,
     },
+    subtitle: {
+        type: String,
+        default: '',
+    },
     discipline: {
         type: String,
         required: true,
@@ -33,6 +37,12 @@ const props = defineProps({
                 >
                     {{ name }}
                 </h1>
+                <p
+                    v-if="subtitle"
+                    class="mt-4 font-serif text-[1.5rem] leading-none tracking-[0.08em] text-[#6b6b6b] sm:text-[1.8rem] lg:text-[2.1rem]"
+                >
+                    {{ subtitle }}
+                </p>
                 <p class="mt-6 text-base tracking-[0.03em] text-[#6b6b6b] sm:text-lg">
                     {{ location }}
                 </p>

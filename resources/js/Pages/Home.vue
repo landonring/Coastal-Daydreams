@@ -34,6 +34,7 @@ const aboutParagraphs = [
 
         <HeroSection
             name="Jennifer Williams"
+            subtitle="Coastal Daydreams"
             discipline="Photography & Art"
             location="Central Coast, California"
         />
@@ -44,9 +45,10 @@ const aboutParagraphs = [
 
         <FooterSection
             email="Jenniferwilliams1956@yahoo.com"
+            phone="559-816-1411"
             name="Jennifer Williams"
             location="Central Coast, California"
-            :disciplines="['Photography', 'Art', 'Commissions']"
+            :disciplines="['Photography', 'Art']"
         />
     </Layout>
 </template>

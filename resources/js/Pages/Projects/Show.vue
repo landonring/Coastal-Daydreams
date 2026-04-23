@@ -26,6 +26,7 @@ const purchaseCopied = ref(false);
 let autoplayTimer = null;
 let purchaseCopyTimer = null;
 const purchaseEmail = 'Jenniferwilliams1956@yahoo.com';
+const purchasePhone = '559-816-1411';
 
 const activeImage = computed(() => props.project.images[currentIndex.value] ?? props.project.hero_image);
 const showSoldMetadata = computed(() => props.project.category === 'Art' && props.project.is_sold);
@@ -246,6 +247,13 @@ onBeforeUnmount(() => {
                             >
                                 {{ purchaseCopied ? 'email copied to clipboard' : purchaseEmail }}
                             </button>
+                            or call
+                            <a
+                                :href="`tel:${purchasePhone.replace(/[^0-9+]/g, '')}`"
+                                class="font-medium text-[#111111] underline decoration-black/20 underline-offset-4 transition-opacity duration-200 hover:opacity-65"
+                            >
+                                {{ purchasePhone }}
+                            </a>
                             to buy this painting.
                         </p>
                     </div>

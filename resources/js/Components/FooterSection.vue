@@ -10,6 +10,10 @@ const props = defineProps({
         type: String,
         required: true,
     },
+    phone: {
+        type: String,
+        required: true,
+    },
     name: {
         type: String,
         required: true,
@@ -62,9 +66,6 @@ onBeforeUnmount(() => {
                     <h2 class="mt-6 font-serif text-4xl leading-[1.02] text-[#111111] sm:text-5xl lg:text-[3.6rem]">
                         Interested in my work or photography?
                     </h2>
-                    <p class="mt-5 max-w-2xl text-sm leading-7 text-[#6b6b6b] sm:text-base">
-                        Available for commissions, original artwork, and quiet visual collaborations rooted in place, light, and atmosphere.
-                    </p>
                     <button
                         type="button"
                         class="mt-10 inline-flex items-center justify-center rounded-full border border-black/10 px-8 py-4 text-sm tracking-[0.28em] text-[#111111] transition-all duration-300 hover:border-black/20 hover:bg-white"
@@ -73,6 +74,9 @@ onBeforeUnmount(() => {
                     >
                         {{ copied ? 'Email copied to clipboard' : email }}
                     </button>
+                    <p class="mt-4 inline-flex items-center justify-center rounded-full border border-black/10 px-8 py-4 text-sm tracking-[0.28em] text-[#111111]">
+                        {{ phone }}
+                    </p>
                 </div>
             </div>
 
@@ -111,15 +115,15 @@ onBeforeUnmount(() => {
 
                 <div class="flex flex-col items-center gap-3 md:items-start xl:items-end xl:text-right">
                     <p class="text-[0.72rem] uppercase tracking-[0.3em] text-[#6b6b6b]">Studio</p>
-                    <p class="mt-2 max-w-sm text-sm leading-7 text-[#6b6b6b]">
-                        Available for original artwork, photography inquiries, and selected commissioned projects.
-                    </p>
                     <a
                         :href="`mailto:${email}`"
-                        class="mt-2 text-sm tracking-[0.18em] text-[#111111] transition-colors duration-300 hover:text-[#6b6b6b]"
+                        class="text-sm tracking-[0.28em] text-[#111111] transition-colors duration-300 hover:text-[#6b6b6b]"
                     >
                         {{ email }}
                     </a>
+                    <p class="text-sm tracking-[0.28em] text-[#111111]">
+                        {{ phone }}
+                    </p>
                     <a
                         href="#top"
                         class="mt-3 text-[0.72rem] uppercase tracking-[0.3em] text-[#6b6b6b] transition-colors duration-300 hover:text-[#111111]"

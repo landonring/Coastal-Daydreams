@@ -23,6 +23,12 @@ const logout = () => {
 
                 <div class="flex items-center gap-3">
                     <Link
+                        href="/#top"
+                        class="px-4 py-3 text-sm text-[#6b6b6b] transition-colors duration-200 hover:text-[#111111]"
+                    >
+                        Home
+                    </Link>
+                    <Link
                         href="/admin/dashboard"
                         class="px-4 py-3 text-sm text-[#6b6b6b] transition-colors duration-200 hover:text-[#111111]"
                     >

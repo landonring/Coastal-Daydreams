@@ -17,6 +17,8 @@ const filteredProjects = computed(() =>
         ? props.projects
         : props.projects.filter((project) => project.category === activeCategory.value),
 );
+
+const hasHoverPreview = (project) => project.hover_preview_enabled && Boolean(project.images?.[1]);
 </script>
 
 <template>
@@ -63,12 +65,13 @@ const filteredProjects = computed(() =>
                         <img
                             :src="project.image"
                             :alt="project.title"
-                            class="block h-auto w-full transition-all duration-500 ease-out group-hover:scale-[1.015] group-hover:opacity-0"
+                            class="block h-auto w-full transition-all duration-500 ease-out"
+                            :class="hasHoverPreview(project) ? 'group-hover:scale-[1.015] group-hover:opacity-0' : ''"
                             loading="lazy"
                             decoding="async"
                         >
                         <img
-                            v-if="project.hover_preview_enabled && project.images?.[1]"
+                            v-if="hasHoverPreview(project)"
                             :src="project.images[1]"
                             :alt="`${project.title} alternate view`"
                             class="absolute inset-0 h-full w-full object-cover opacity-0 transition-all duration-500 ease-out group-hover:scale-[1.015] group-hover:opacity-100"

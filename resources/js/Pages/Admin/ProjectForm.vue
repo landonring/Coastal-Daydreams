@@ -290,12 +290,13 @@ onBeforeUnmount(() => {
                 </div>
 
                 <div>
-                    <label class="mb-3 block text-sm text-[#111111]">Medium</label>
+                    <label class="mb-3 block text-sm text-[#111111]">Medium / Materials</label>
                     <input
                         v-model="form.medium"
                         type="text"
                         class="w-full rounded-2xl bg-[#f7f6f3] px-5 py-4 text-base text-[#111111] outline-none"
                     >
+                    <p class="mt-2 text-xs uppercase tracking-[0.24em] text-[#9a9a9a]">Example: Acrylic on canvas</p>
                     <p v-if="form.errors.medium" class="mt-3 text-sm text-[#9c4b4b]">{{ form.errors.medium }}</p>
                 </div>
 
