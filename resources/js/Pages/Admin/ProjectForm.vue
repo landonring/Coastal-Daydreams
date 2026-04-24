@@ -18,6 +18,7 @@ const props = defineProps({
 const isEditing = computed(() => Boolean(props.project));
 const slugWasEdited = ref(Boolean(props.project?.slug));
 const objectUrls = [];
+const errorMessages = computed(() => Object.values(form.errors));
 
 const slugify = (value) => value
     .toLowerCase()
@@ -163,6 +164,18 @@ onBeforeUnmount(() => {
         </div>
 
         <form class="mt-8 rounded-[1.75rem] bg-white p-6 md:p-8" @submit.prevent="submit">
+            <div
+                v-if="errorMessages.length"
+                class="mb-6 rounded-[1.5rem] border border-[#e8caca] bg-[#fbf3f3] p-5"
+            >
+                <p class="text-[0.72rem] uppercase tracking-[0.28em] text-[#9c4b4b]">Please Fix These Fields</p>
+                <ul class="mt-3 space-y-2 text-sm leading-6 text-[#9c4b4b]">
+                    <li v-for="message in errorMessages" :key="message">
+                        {{ message }}
+                    </li>
+                </ul>
+            </div>
+
             <div class="grid gap-6 md:grid-cols-2">
                 <div class="md:col-span-2">
                     <label class="mb-3 block text-sm text-[#111111]">Title</label>
@@ -202,7 +215,7 @@ onBeforeUnmount(() => {
                         <div>
                             <label class="mb-3 block text-sm text-[#111111]">Images</label>
                             <p class="text-xs uppercase tracking-[0.22em] text-[#9a9a9a]">
-                                Drag the sequence with up/down controls. Image 1 is the main image. Image 2 appears on hover.
+                                Add as many images as you need. Image 1 is the main image, image 2 appears on hover, and each image can be up to 15 MB.
                             </p>
                         </div>
                     </div>
