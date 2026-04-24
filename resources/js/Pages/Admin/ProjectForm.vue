@@ -18,7 +18,11 @@ const props = defineProps({
 const isEditing = computed(() => Boolean(props.project));
 const slugWasEdited = ref(Boolean(props.project?.slug));
 const objectUrls = [];
+const isPreparingImages = ref(false);
+const imagePreparationMessage = ref('');
 const errorMessages = computed(() => Object.values(form.errors));
+const MAX_CLIENT_UPLOAD_BYTES = 1.8 * 1024 * 1024;
+const MAX_IMAGE_DIMENSION = 2400;
 
 const slugify = (value) => value
     .toLowerCase()
@@ -75,21 +79,101 @@ const onSlugInput = () => {
     form.slug = slugify(form.slug);
 };
 
-const onFilesSelected = (event) => {
+const loadImage = (src) => new Promise((resolve, reject) => {
+    const image = new Image();
+    image.onload = () => resolve(image);
+    image.onerror = () => reject(new Error('Image could not be loaded.'));
+    image.src = src;
+});
+
+const canvasToBlob = (canvas, type, quality) => new Promise((resolve, reject) => {
+    canvas.toBlob((blob) => {
+        if (blob) {
+            resolve(blob);
+            return;
+        }
+
+        reject(new Error('Image could not be compressed.'));
+    }, type, quality);
+});
+
+const compressImage = async (file) => {
+    if (file.size <= MAX_CLIENT_UPLOAD_BYTES) {
+        return file;
+    }
+
+    const sourceUrl = URL.createObjectURL(file);
+
+    try {
+        const image = await loadImage(sourceUrl);
+        const scale = Math.min(1, MAX_IMAGE_DIMENSION / Math.max(image.width, image.height));
+        const canvas = document.createElement('canvas');
+        canvas.width = Math.max(1, Math.round(image.width * scale));
+        canvas.height = Math.max(1, Math.round(image.height * scale));
+
+        const context = canvas.getContext('2d');
+
+        if (!context) {
+            throw new Error('Image context is unavailable.');
+        }
+
+        context.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+        let quality = 0.9;
+        let blob = await canvasToBlob(canvas, 'image/jpeg', quality);
+
+        while (blob.size > MAX_CLIENT_UPLOAD_BYTES && quality > 0.45) {
+            quality -= 0.1;
+            blob = await canvasToBlob(canvas, 'image/jpeg', quality);
+        }
+
+        const safeName = file.name.replace(/\.[^.]+$/, '') || 'image';
+
+        return new File([blob], `${safeName}.jpg`, {
+            type: 'image/jpeg',
+            lastModified: Date.now(),
+        });
+    } finally {
+        URL.revokeObjectURL(sourceUrl);
+    }
+};
+
+const onFilesSelected = async (event) => {
     const files = Array.from(event.target.files ?? []);
 
-    files.forEach((file, index) => {
-        const preview = URL.createObjectURL(file);
-        objectUrls.push(preview);
+    if (!files.length) {
+        return;
+    }
 
-        imageItems.value.push({
-            key: `${Date.now()}-${index}-${Math.random().toString(36).slice(2, 8)}`,
-            kind: 'new',
-            preview,
-            file,
-            name: file.name,
+    isPreparingImages.value = true;
+    imagePreparationMessage.value = 'Preparing images for upload...';
+
+    try {
+        const preparedFiles = await Promise.all(files.map((file) => compressImage(file)));
+
+        preparedFiles.forEach((file, index) => {
+            const preview = URL.createObjectURL(file);
+            objectUrls.push(preview);
+
+            imageItems.value.push({
+                key: `${Date.now()}-${index}-${Math.random().toString(36).slice(2, 8)}`,
+                kind: 'new',
+                preview,
+                file,
+                name: file.name,
+            });
         });
-    });
+
+        imagePreparationMessage.value = preparedFiles.some((file, index) => file.name !== files[index].name || file.size !== files[index].size)
+            ? 'Large images were optimized before upload.'
+            : '';
+    } catch (error) {
+        imagePreparationMessage.value = error instanceof Error
+            ? error.message
+            : 'Images could not be prepared for upload.';
+    } finally {
+        isPreparingImages.value = false;
+    }
 
     syncImageFields();
     event.target.value = '';
@@ -225,8 +309,10 @@ onBeforeUnmount(() => {
                         accept="image/*"
                         multiple
                         class="mt-4 w-full rounded-2xl bg-[#f7f6f3] px-5 py-4 text-sm text-[#6b6b6b]"
+                        :disabled="isPreparingImages"
                         @change="onFilesSelected"
                     >
+                    <p v-if="imagePreparationMessage" class="mt-3 text-sm text-[#6b6b6b]">{{ imagePreparationMessage }}</p>
                     <p v-if="form.errors.images" class="mt-3 text-sm text-[#9c4b4b]">{{ form.errors.images }}</p>
                     <p v-if="form.errors.image_order" class="mt-3 text-sm text-[#9c4b4b]">{{ form.errors.image_order }}</p>
 
@@ -344,9 +430,9 @@ onBeforeUnmount(() => {
                 <button
                     type="submit"
                     class="rounded-2xl bg-[#111111] px-6 py-4 text-sm uppercase tracking-[0.18em] text-white transition-opacity duration-200 hover:opacity-90 disabled:opacity-50"
-                    :disabled="form.processing"
+                    :disabled="form.processing || isPreparingImages"
                 >
-                    Save
+                    {{ isPreparingImages ? 'Preparing Images' : 'Save' }}
                 </button>
                 <Link
                     href="/admin/dashboard"
