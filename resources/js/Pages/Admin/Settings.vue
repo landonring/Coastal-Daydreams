@@ -32,6 +32,10 @@ const form = useForm({
     password_confirmation: '',
 });
 
+const showCurrentPassword = ref(false);
+const showNewPassword = ref(false);
+const showPasswordConfirmation = ref(false);
+
 const submit = () => {
     form.put('/admin/settings/password', {
         onSuccess: () => form.reset(),
@@ -215,11 +219,22 @@ onBeforeUnmount(() => {
                     <div class="mt-8 space-y-6">
                         <div>
                             <label class="mb-3 block text-sm text-[#111111]">Current password</label>
-                            <input
-                                v-model="form.current_password"
-                                type="password"
-                                class="w-full rounded-2xl bg-[#f7f6f3] px-5 py-4 text-base text-[#111111] outline-none"
-                            >
+                            <div class="rounded-2xl bg-[#f7f6f3] px-5 py-2">
+                                <div class="flex items-center gap-3">
+                                    <input
+                                        v-model="form.current_password"
+                                        :type="showCurrentPassword ? 'text' : 'password'"
+                                        class="min-w-0 flex-1 bg-transparent py-2 text-base text-[#111111] outline-none"
+                                    >
+                                    <button
+                                        type="button"
+                                        class="shrink-0 text-xs uppercase tracking-[0.22em] text-[#6b6b6b] transition-colors duration-200 hover:text-[#111111]"
+                                        @click="showCurrentPassword = !showCurrentPassword"
+                                    >
+                                        {{ showCurrentPassword ? 'Hide' : 'Show' }}
+                                    </button>
+                                </div>
+                            </div>
                             <p v-if="form.errors.current_password" class="mt-3 text-sm text-[#9c4b4b]">
                                 {{ form.errors.current_password }}
                             </p>
@@ -227,11 +242,22 @@ onBeforeUnmount(() => {
 
                         <div>
                             <label class="mb-3 block text-sm text-[#111111]">New password</label>
-                            <input
-                                v-model="form.password"
-                                type="password"
-                                class="w-full rounded-2xl bg-[#f7f6f3] px-5 py-4 text-base text-[#111111] outline-none"
-                            >
+                            <div class="rounded-2xl bg-[#f7f6f3] px-5 py-2">
+                                <div class="flex items-center gap-3">
+                                    <input
+                                        v-model="form.password"
+                                        :type="showNewPassword ? 'text' : 'password'"
+                                        class="min-w-0 flex-1 bg-transparent py-2 text-base text-[#111111] outline-none"
+                                    >
+                                    <button
+                                        type="button"
+                                        class="shrink-0 text-xs uppercase tracking-[0.22em] text-[#6b6b6b] transition-colors duration-200 hover:text-[#111111]"
+                                        @click="showNewPassword = !showNewPassword"
+                                    >
+                                        {{ showNewPassword ? 'Hide' : 'Show' }}
+                                    </button>
+                                </div>
+                            </div>
                             <p v-if="form.errors.password" class="mt-3 text-sm text-[#9c4b4b]">
                                 {{ form.errors.password }}
                             </p>
@@ -239,11 +265,22 @@ onBeforeUnmount(() => {
 
                         <div>
                             <label class="mb-3 block text-sm text-[#111111]">Confirm new password</label>
-                            <input
-                                v-model="form.password_confirmation"
-                                type="password"
-                                class="w-full rounded-2xl bg-[#f7f6f3] px-5 py-4 text-base text-[#111111] outline-none"
-                            >
+                            <div class="rounded-2xl bg-[#f7f6f3] px-5 py-2">
+                                <div class="flex items-center gap-3">
+                                    <input
+                                        v-model="form.password_confirmation"
+                                        :type="showPasswordConfirmation ? 'text' : 'password'"
+                                        class="min-w-0 flex-1 bg-transparent py-2 text-base text-[#111111] outline-none"
+                                    >
+                                    <button
+                                        type="button"
+                                        class="shrink-0 text-xs uppercase tracking-[0.22em] text-[#6b6b6b] transition-colors duration-200 hover:text-[#111111]"
+                                        @click="showPasswordConfirmation = !showPasswordConfirmation"
+                                    >
+                                        {{ showPasswordConfirmation ? 'Hide' : 'Show' }}
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
 

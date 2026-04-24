@@ -1,9 +1,12 @@
 <script setup>
 import { Head, useForm } from '@inertiajs/vue3';
+import { ref } from 'vue';
 
 const form = useForm({
     password: '',
 });
+
+const showPassword = ref(false);
 
 const submit = () => {
     form.post('/admin/login', {
@@ -26,14 +29,25 @@ const submit = () => {
             <form class="mt-8 space-y-6" @submit.prevent="submit">
                 <div>
                     <label for="password" class="mb-3 block text-sm text-[#111111]">Password</label>
-                    <input
-                        id="password"
-                        v-model="form.password"
-                        type="password"
-                        class="w-full rounded-2xl bg-[#f7f6f3] px-5 py-4 text-base text-[#111111] outline-none ring-0 placeholder:text-[#9a9a9a]"
-                        placeholder="Enter password"
-                        autofocus
-                    >
+                    <div class="rounded-2xl bg-[#f7f6f3] px-5 py-2">
+                        <div class="flex items-center gap-3">
+                            <input
+                                id="password"
+                                v-model="form.password"
+                                :type="showPassword ? 'text' : 'password'"
+                                class="min-w-0 flex-1 bg-transparent py-2 text-base text-[#111111] outline-none ring-0 placeholder:text-[#9a9a9a]"
+                                placeholder="Enter password"
+                                autofocus
+                            >
+                            <button
+                                type="button"
+                                class="shrink-0 text-xs uppercase tracking-[0.22em] text-[#6b6b6b] transition-colors duration-200 hover:text-[#111111]"
+                                @click="showPassword = !showPassword"
+                            >
+                                {{ showPassword ? 'Hide' : 'Show' }}
+                            </button>
+                        </div>
+                    </div>
                     <p v-if="form.errors.password" class="mt-3 text-sm text-[#9c4b4b]">{{ form.errors.password }}</p>
                 </div>
 
