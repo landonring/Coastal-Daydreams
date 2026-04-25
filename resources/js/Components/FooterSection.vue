@@ -68,7 +68,7 @@ onBeforeUnmount(() => {
                     </h2>
                     <button
                         type="button"
-                        class="mt-10 inline-flex items-center justify-center rounded-full border border-black/10 px-8 py-4 text-sm tracking-[0.28em] text-[#111111] transition-all duration-300 hover:border-black/20 hover:bg-white"
+                        class="mt-10 inline-flex max-w-full items-center justify-center rounded-full border border-black/10 px-5 py-4 text-[0.72rem] tracking-[0.12em] text-[#111111] transition-all duration-300 hover:border-black/20 hover:bg-white sm:px-8 sm:text-sm sm:tracking-[0.28em]"
                         :aria-label="copied ? 'Email copied to clipboard' : `Copy ${email} to clipboard`"
                         @click="copyEmail"
                     >
