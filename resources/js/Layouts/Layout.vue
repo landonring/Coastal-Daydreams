@@ -5,6 +5,7 @@ import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 const isScrolled = ref(false);
 const isOpen = ref(false);
 const mobileLinks = [
+    { href: '/', label: 'Home' },
     { href: '/#about', label: 'About' },
     { href: '/#projects', label: 'Projects' },
     { href: '/#footer', label: 'Contact' },
