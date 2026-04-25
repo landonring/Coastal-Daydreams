@@ -72,9 +72,7 @@ class ProjectRequest extends FormRequest
         $this->merge([
             'slug' => $slug,
             'hover_preview_enabled' => $this->boolean('hover_preview_enabled', true),
-            'is_sold' => $this->input('category') === 'Art'
-                ? $this->boolean('is_sold')
-                : false,
+            'is_sold' => $this->boolean('is_sold'),
         ]);
     }
 }

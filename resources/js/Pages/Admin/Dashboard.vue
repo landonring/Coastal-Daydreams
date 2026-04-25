@@ -137,14 +137,14 @@ const clearDragState = () => {
         </div>
 
         <div v-if="localProjects.length" class="mt-8 space-y-10">
-            <section v-if="artProjects.length" class="space-y-4">
+            <section v-if="photographyProjects.length" class="space-y-4">
                 <div>
-                    <p class="text-[0.72rem] uppercase tracking-[0.34em] text-[#6b6b6b]">Art</p>
-                    <p class="mt-2 text-sm text-[#9a9a9a]">Drag to reorder artwork.</p>
+                    <p class="text-[0.72rem] uppercase tracking-[0.34em] text-[#6b6b6b]">Photography</p>
+                    <p class="mt-2 text-sm text-[#9a9a9a]">Drag to reorder photography.</p>
                 </div>
 
                 <article
-                    v-for="(project, index) in artProjects"
+                    v-for="(project, index) in photographyProjects"
                     :key="project.id"
                     draggable="true"
                     class="grid cursor-move gap-5 rounded-[1.75rem] bg-white p-5 transition-colors duration-200 md:grid-cols-[120px_1fr_auto] md:items-center md:gap-6 md:p-6"
@@ -208,14 +208,14 @@ const clearDragState = () => {
                 </article>
             </section>
 
-            <section v-if="photographyProjects.length" class="space-y-4">
+            <section v-if="artProjects.length" class="space-y-4">
                 <div>
-                    <p class="text-[0.72rem] uppercase tracking-[0.34em] text-[#6b6b6b]">Photography</p>
-                    <p class="mt-2 text-sm text-[#9a9a9a]">Drag to reorder photography.</p>
+                    <p class="text-[0.72rem] uppercase tracking-[0.34em] text-[#6b6b6b]">Art</p>
+                    <p class="mt-2 text-sm text-[#9a9a9a]">Drag to reorder artwork.</p>
                 </div>
 
                 <article
-                    v-for="(project, index) in photographyProjects"
+                    v-for="(project, index) in artProjects"
                     :key="project.id"
                     draggable="true"
                     class="grid cursor-move gap-5 rounded-[1.75rem] bg-white p-5 transition-colors duration-200 md:grid-cols-[120px_1fr_auto] md:items-center md:gap-6 md:p-6"
@@ -234,6 +234,12 @@ const clearDragState = () => {
                     <div class="min-w-0">
                         <div class="flex flex-wrap items-center gap-3">
                             <h2 class="font-serif text-2xl text-[#111111]">{{ project.title }}</h2>
+                            <span
+                                class="rounded-full px-3 py-1 text-[0.68rem] uppercase tracking-[0.24em]"
+                                :class="project.is_sold ? 'bg-[#efe7de] text-[#7c6450]' : 'bg-[#f4f4f4] text-[#6b6b6b]'"
+                            >
+                                {{ project.is_sold ? 'Sold' : 'Available' }}
+                            </span>
                         </div>
 
                         <p class="mt-3 text-sm leading-7 text-[#6b6b6b]">
@@ -255,6 +261,13 @@ const clearDragState = () => {
                         >
                             Edit
                         </Link>
+                        <button
+                            type="button"
+                            class="rounded-2xl bg-[#f7f6f3] px-4 py-3 text-sm text-[#111111] transition-colors duration-200 hover:bg-[#efede8]"
+                            @click="toggleSold(project)"
+                        >
+                            {{ project.is_sold ? 'Mark Available' : 'Toggle Sold' }}
+                        </button>
                         <button
                             type="button"
                             class="rounded-2xl bg-[#f7f6f3] px-4 py-3 text-sm text-[#111111] transition-colors duration-200 hover:bg-[#efe3e3]"

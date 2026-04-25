@@ -64,7 +64,7 @@ onBeforeUnmount(() => {
                     <div class="mb-12 h-px w-24 bg-black/10" />
                     <p class="text-[0.72rem] uppercase tracking-[0.34em] text-[#6b6b6b]">Contact</p>
                     <h2 class="mt-6 font-serif text-4xl leading-[1.02] text-[#111111] sm:text-5xl lg:text-[3.6rem]">
-                        Interested in my work or photography?
+                        Interested in my photography and art?
                     </h2>
                     <button
                         type="button"

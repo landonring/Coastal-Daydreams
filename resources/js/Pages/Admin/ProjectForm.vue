@@ -420,7 +420,7 @@ onBeforeUnmount(() => {
                     <span class="text-sm text-[#111111]">Show second image on hover</span>
                 </label>
 
-                <label v-if="form.category === 'Art'" class="inline-flex items-center gap-3 md:self-end">
+                <label class="inline-flex items-center gap-3 md:self-end">
                     <input v-model="form.is_sold" type="checkbox" class="h-5 w-5 rounded border-black/10 text-[#111111]">
                     <span class="text-sm text-[#111111]">Mark as sold</span>
                 </label>

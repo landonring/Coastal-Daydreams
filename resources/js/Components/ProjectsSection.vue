@@ -27,9 +27,6 @@ const hasHoverPreview = (project) => project.hover_preview_enabled && Boolean(pr
             <div class="mb-14 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between" v-reveal>
                 <div class="max-w-3xl space-y-5">
                     <p class="text-[0.72rem] uppercase tracking-[0.34em] text-[#6b6b6b]">Projects</p>
-                    <h2 class="font-serif text-4xl leading-[1.02] text-[#111111] sm:text-5xl">
-                        Selected work, arranged with a quieter gallery rhythm.
-                    </h2>
                 </div>
 
                 <div class="flex flex-wrap gap-3">
