@@ -6,7 +6,11 @@ const props = defineProps({
         type: Array,
         required: true,
     },
-    paragraphs: {
+    photographyParagraphs: {
+        type: Array,
+        required: true,
+    },
+    artParagraphs: {
         type: Array,
         required: true,
     },
@@ -52,15 +56,23 @@ onBeforeUnmount(() => {
         <div class="mx-auto grid max-w-[1560px] items-start gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(500px,720px)] lg:gap-24 xl:gap-28">
             <div class="relative z-10 max-w-[42rem] space-y-8 lg:pt-6" v-reveal>
                 <p class="text-[0.72rem] uppercase tracking-[0.34em] text-[#6b6b6b]">About</p>
-                <h2 class="max-w-[11ch] font-serif text-[1.8rem] leading-[0.98] text-[#111111] opacity-100 antialiased [background:none] [filter:none] [mask-image:none] [text-shadow:0_0_0_#111111] sm:text-[2.2rem] xl:text-[2.5rem]">
-                    <span class="block sm:whitespace-nowrap">Jennifer is a self taught</span>
-                    <span class="block sm:whitespace-nowrap">passionate photographer.</span>
-                </h2>
 
-                <div class="max-w-[44rem] space-y-3 text-[0.88rem] leading-7 text-[#6b6b6b]">
-                    <p v-for="paragraph in paragraphs" :key="paragraph">
-                        {{ paragraph }}
-                    </p>
+                <div class="max-w-[44rem]">
+                    <p class="text-sm text-[#111111]">Photography</p>
+                    <div class="mt-4 space-y-3 text-[0.88rem] leading-7 text-[#6b6b6b]">
+                        <p v-for="paragraph in photographyParagraphs" :key="`photo-${paragraph}`">
+                            {{ paragraph }}
+                        </p>
+                    </div>
+
+                    <div class="mt-10">
+                        <p class="text-sm text-[#111111]">Art</p>
+                        <div class="mt-4 space-y-3 text-[0.88rem] leading-7 text-[#6b6b6b]">
+                            <p v-for="paragraph in artParagraphs" :key="`art-${paragraph}`">
+                                {{ paragraph }}
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
