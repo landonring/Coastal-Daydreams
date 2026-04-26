@@ -248,9 +248,9 @@ onBeforeUnmount(() => {
                             >
                                 {{ purchaseCopied ? 'email copied to clipboard' : purchaseEmail }}
                             </button>
-                            or call
+                            or text
                             <a
-                                :href="`tel:${purchasePhone.replace(/[^0-9+]/g, '')}`"
+                                :href="`sms:${purchasePhone.replace(/[^0-9+]/g, '')}`"
                                 class="font-medium text-[#111111] underline decoration-black/20 underline-offset-4 transition-opacity duration-200 hover:opacity-65"
                             >
                                 {{ purchasePhone }}
@@ -273,9 +273,9 @@ onBeforeUnmount(() => {
                             >
                                 {{ purchaseCopied ? 'email copied to clipboard' : purchaseEmail }}
                             </button>
-                            or call
+                            or text
                             <a
-                                :href="`tel:${purchasePhone.replace(/[^0-9+]/g, '')}`"
+                                :href="`sms:${purchasePhone.replace(/[^0-9+]/g, '')}`"
                                 class="font-medium text-[#111111] underline decoration-black/20 underline-offset-4 transition-opacity duration-200 hover:opacity-65"
                             >
                                 {{ purchasePhone }}
