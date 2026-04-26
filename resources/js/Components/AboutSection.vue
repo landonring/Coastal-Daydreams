@@ -58,7 +58,7 @@ onBeforeUnmount(() => {
                 <p class="text-[0.72rem] uppercase tracking-[0.34em] text-[#6b6b6b]">About</p>
 
                 <div class="max-w-[44rem]">
-                    <p class="text-sm text-[#111111]">Photography</p>
+                    <p class="font-serif text-[1.35rem] leading-none text-[#111111] sm:text-[1.55rem]">Photography</p>
                     <div class="mt-4 space-y-3 text-[0.88rem] leading-7 text-[#6b6b6b]">
                         <p v-for="paragraph in photographyParagraphs" :key="`photo-${paragraph}`">
                             {{ paragraph }}
@@ -66,7 +66,7 @@ onBeforeUnmount(() => {
                     </div>
 
                     <div class="mt-10">
-                        <p class="text-sm text-[#111111]">Art</p>
+                        <p class="font-serif text-[1.35rem] leading-none text-[#111111] sm:text-[1.55rem]">Art</p>
                         <div class="mt-4 space-y-3 text-[0.88rem] leading-7 text-[#6b6b6b]">
                             <p v-for="paragraph in artParagraphs" :key="`art-${paragraph}`">
                                 {{ paragraph }}

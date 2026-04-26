@@ -90,6 +90,11 @@ const hasHoverPreview = (project) => project.hover_preview_enabled && Boolean(pr
                         <h3 class="mt-4 text-[1.18rem] uppercase tracking-[0.18em] text-[#111111]">
                             {{ project.title }}
                         </h3>
+                        <span
+                            class="mt-5 inline-flex items-center justify-center rounded-full border border-black/10 px-5 py-3 text-[0.68rem] uppercase tracking-[0.28em] text-[#111111] transition-colors duration-300 group-hover:border-black/20 group-hover:bg-[#f7f6f3]"
+                        >
+                            View Now
+                        </span>
                     </div>
                 </Link>
             </div>
