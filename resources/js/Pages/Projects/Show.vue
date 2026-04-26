@@ -25,13 +25,14 @@ const touchStartX = ref(null);
 const purchaseCopied = ref(false);
 let autoplayTimer = null;
 let purchaseCopyTimer = null;
-const purchaseEmail = 'Jenniferwilliams1956@yahoo.com';
+const purchaseEmail = 'coastaldaydreams@yahoo.com';
 const purchasePhone = '559-816-1411';
 
 const activeImage = computed(() => props.project.images[currentIndex.value] ?? props.project.hero_image);
 const showSoldMetadata = computed(() => props.project.category === 'Art' && props.project.is_sold);
 const showPurchaseCta = computed(() => props.project.category === 'Art' && !props.project.is_sold);
 const showSoldCta = computed(() => props.project.category === 'Art' && props.project.is_sold);
+const showPhotographyCta = computed(() => props.project.category === 'Photography');
 
 const copyPurchaseEmail = async () => {
     try {
@@ -247,14 +248,39 @@ onBeforeUnmount(() => {
                             >
                                 {{ purchaseCopied ? 'email copied to clipboard' : purchaseEmail }}
                             </button>
-                            or call
+                            or text
                             <a
-                                :href="`tel:${purchasePhone.replace(/[^0-9+]/g, '')}`"
+                                :href="`sms:${purchasePhone.replace(/[^0-9+]/g, '')}`"
                                 class="font-medium text-[#111111] underline decoration-black/20 underline-offset-4 transition-opacity duration-200 hover:opacity-65"
                             >
                                 {{ purchasePhone }}
                             </a>
                             to buy this painting.
+                        </p>
+                    </div>
+
+                    <div
+                        v-if="showPhotographyCta"
+                        class="mx-auto mt-10 max-w-2xl rounded-[1.5rem] bg-[#f7f6f3] px-6 py-6 text-center"
+                    >
+                        <p class="text-[0.72rem] uppercase tracking-[0.34em] text-[#9a9a9a]">Photography Inquiries</p>
+                        <p class="mt-4 text-sm leading-7 text-[#6b6b6b]">
+                            Email
+                            <button
+                                type="button"
+                                class="font-medium text-[#111111] underline decoration-black/20 underline-offset-4 transition-opacity duration-200 hover:opacity-65"
+                                @click="copyPurchaseEmail"
+                            >
+                                {{ purchaseCopied ? 'email copied to clipboard' : purchaseEmail }}
+                            </button>
+                            or text
+                            <a
+                                :href="`sms:${purchasePhone.replace(/[^0-9+]/g, '')}`"
+                                class="font-medium text-[#111111] underline decoration-black/20 underline-offset-4 transition-opacity duration-200 hover:opacity-65"
+                            >
+                                {{ purchasePhone }}
+                            </a>
+                            for photography inquiries.
                         </p>
                     </div>
 

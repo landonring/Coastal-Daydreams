@@ -29,7 +29,7 @@ const props = defineProps({
 
         <div class="relative z-10 flex w-full -translate-y-[8vh] justify-center px-6 text-center md:px-10 lg:-translate-y-[10vh]">
             <div class="max-w-4xl pt-4 md:pt-6">
-                <p class="text-[0.72rem] uppercase tracking-[0.38em] text-[#6b6b6b]">
+                <p class="text-[0.9rem] font-semibold uppercase tracking-[0.3em] text-[#6b6b6b] sm:text-[1rem]">
                     {{ discipline }}
                 </p>
                 <h1
