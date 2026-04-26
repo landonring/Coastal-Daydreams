@@ -25,7 +25,7 @@ const touchStartX = ref(null);
 const purchaseCopied = ref(false);
 let autoplayTimer = null;
 let purchaseCopyTimer = null;
-const purchaseEmail = 'coastaldaydreams@yahoo.com';
+const purchaseEmail = 'Jenniferwilliams1956@yahoo.com';
 const purchasePhone = '559-816-1411';
 
 const activeImage = computed(() => props.project.images[currentIndex.value] ?? props.project.hero_image);
@@ -248,9 +248,9 @@ onBeforeUnmount(() => {
                             >
                                 {{ purchaseCopied ? 'email copied to clipboard' : purchaseEmail }}
                             </button>
-                            or text
+                            or call
                             <a
-                                :href="`sms:${purchasePhone.replace(/[^0-9+]/g, '')}`"
+                                :href="`tel:${purchasePhone.replace(/[^0-9+]/g, '')}`"
                                 class="font-medium text-[#111111] underline decoration-black/20 underline-offset-4 transition-opacity duration-200 hover:opacity-65"
                             >
                                 {{ purchasePhone }}
@@ -273,9 +273,9 @@ onBeforeUnmount(() => {
                             >
                                 {{ purchaseCopied ? 'email copied to clipboard' : purchaseEmail }}
                             </button>
-                            or text
+                            or call
                             <a
-                                :href="`sms:${purchasePhone.replace(/[^0-9+]/g, '')}`"
+                                :href="`tel:${purchasePhone.replace(/[^0-9+]/g, '')}`"
                                 class="font-medium text-[#111111] underline decoration-black/20 underline-offset-4 transition-opacity duration-200 hover:opacity-65"
                             >
                                 {{ purchasePhone }}
