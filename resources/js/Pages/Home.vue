@@ -54,7 +54,7 @@ const artParagraphs = [
         <ProjectsSection :projects="projects" />
 
         <FooterSection
-            email="Jenniferwilliams1956@yahoo.com"
+            email="coastaldaydreams@yahoo.com"
             phone="559-816-1411"
             name="Jennifer Williams"
             location="Central Coast, California"

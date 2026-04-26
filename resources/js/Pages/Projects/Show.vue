@@ -25,7 +25,7 @@ const touchStartX = ref(null);
 const purchaseCopied = ref(false);
 let autoplayTimer = null;
 let purchaseCopyTimer = null;
-const purchaseEmail = 'Jenniferwilliams1956@yahoo.com';
+const purchaseEmail = 'coastaldaydreams@yahoo.com';
 const purchasePhone = '559-816-1411';
 
 const activeImage = computed(() => props.project.images[currentIndex.value] ?? props.project.hero_image);
