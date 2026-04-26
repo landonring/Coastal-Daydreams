@@ -110,6 +110,7 @@ onBeforeUnmount(() => {
                         <a href="#about" class="transition-colors duration-300 hover:text-[#6b6b6b]">About</a>
                         <a href="#projects" class="transition-colors duration-300 hover:text-[#6b6b6b]">Projects</a>
                         <a href="#footer" class="transition-colors duration-300 hover:text-[#6b6b6b]">Contact</a>
+                        <a href="/terms-of-use" class="transition-colors duration-300 hover:text-[#6b6b6b]">Terms of Use</a>
                     </div>
                 </div>
 
@@ -129,12 +130,6 @@ onBeforeUnmount(() => {
                         class="mt-3 text-[0.72rem] uppercase tracking-[0.3em] text-[#6b6b6b] transition-colors duration-300 hover:text-[#111111]"
                     >
                         Back to top
-                    </a>
-                    <a
-                        href="/terms-of-use"
-                        class="text-[0.72rem] uppercase tracking-[0.3em] text-[#6b6b6b] transition-colors duration-300 hover:text-[#111111]"
-                    >
-                        Terms of Use
                     </a>
                     <p class="text-[0.68rem] uppercase tracking-[0.28em] text-[#9a9a9a]">
                         © {{ currentYear }} {{ name }}
