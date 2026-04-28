@@ -27,6 +27,7 @@ Route::middleware('admin.auth')->prefix('admin')->name('admin.')->group(function
     Route::patch('/projects/{project}/sold', [AdminProjectController::class, 'toggleSold'])->name('projects.toggle-sold');
     Route::patch('/projects/{project}/move', [AdminProjectController::class, 'move'])->name('projects.move');
     Route::patch('/projects/reorder', [AdminProjectController::class, 'reorder'])->name('projects.reorder');
+    Route::get('/bio', [AdminSettingsController::class, 'bio'])->name('bio.edit');
     Route::get('/settings', [AdminSettingsController::class, 'edit'])->name('settings.edit');
     Route::put('/settings/password', [AdminSettingsController::class, 'update'])->name('settings.password.update');
     Route::put('/settings/about-photos', [AdminSettingsController::class, 'updateAboutPhotos'])->name('settings.about-photos.update');

@@ -17,12 +17,18 @@ class AdminSettingsController extends Controller
     public function edit(): Response
     {
         return Inertia::render('Admin/Settings', [
-            'aboutPhotos' => $this->aboutPhotos(),
-            'photographyParagraphs' => $this->photographyParagraphs(),
-            'artParagraphs' => $this->artParagraphs(),
             'hasCustomPassword' => (bool) Setting::query()
                 ->where('key', config('admin.password_setting_key'))
                 ->exists(),
+        ]);
+    }
+
+    public function bio(): Response
+    {
+        return Inertia::render('Admin/Bio', [
+            'aboutPhotos' => $this->aboutPhotos(),
+            'photographyParagraphs' => $this->photographyParagraphs(),
+            'artParagraphs' => $this->artParagraphs(),
         ]);
     }
 
@@ -97,7 +103,7 @@ class AdminSettingsController extends Controller
 
         Setting::setArray('about_photo_paths', $orderedPaths);
 
-        return to_route('admin.settings.edit')->with('success', 'About photos updated.');
+        return to_route('admin.bio.edit')->with('success', 'About photos updated.');
     }
 
     public function updateAboutContent(Request $request): RedirectResponse
@@ -125,7 +131,7 @@ class AdminSettingsController extends Controller
         Setting::setArray('about_photography_paragraphs', $photographyParagraphs);
         Setting::setArray('about_art_paragraphs', $artParagraphs);
 
-        return to_route('admin.settings.edit')->with('success', 'About bio updated.');
+        return to_route('admin.bio.edit')->with('success', 'About bio updated.');
     }
 
     private function aboutPhotos(): array
