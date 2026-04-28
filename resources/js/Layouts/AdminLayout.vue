@@ -35,6 +35,12 @@ const logout = () => {
                         Projects
                     </Link>
                     <Link
+                        href="/admin/settings#bio"
+                        class="px-4 py-3 text-sm text-[#6b6b6b] transition-colors duration-200 hover:text-[#111111]"
+                    >
+                        Bio
+                    </Link>
+                    <Link
                         href="/admin/settings"
                         class="px-4 py-3 text-sm text-[#6b6b6b] transition-colors duration-200 hover:text-[#111111]"
                     >

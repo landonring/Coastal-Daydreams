@@ -30,5 +30,6 @@ Route::middleware('admin.auth')->prefix('admin')->name('admin.')->group(function
     Route::get('/settings', [AdminSettingsController::class, 'edit'])->name('settings.edit');
     Route::put('/settings/password', [AdminSettingsController::class, 'update'])->name('settings.password.update');
     Route::put('/settings/about-photos', [AdminSettingsController::class, 'updateAboutPhotos'])->name('settings.about-photos.update');
+    Route::put('/settings/about-content', [AdminSettingsController::class, 'updateAboutContent'])->name('settings.about-content.update');
     Route::post('/logout', [AdminAuthController::class, 'destroy'])->name('logout');
 });
